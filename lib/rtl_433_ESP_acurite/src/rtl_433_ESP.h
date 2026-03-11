@@ -152,6 +152,28 @@
 #  endif
 #endif
 
+#if defined(ARDUINO_M5STACK_Core2)
+#  ifndef RF_SX1278
+#    define RF_SX1276 "SX1276"
+#  endif
+#  ifndef RF_MODULE_DIO0
+#    define RF_MODULE_DIO0 35   //LORA_IRQ
+#  endif
+#  ifndef RF_MODULE_DIO1
+#    define RF_MODULE_DIO1 -1   //LORA_D1
+#  endif
+#  ifndef RF_MODULE_DIO2
+#    define RF_MODULE_DIO2 -1   //LORA_D2
+#  endif
+#  ifndef RF_MODULE_RST
+#    define RF_MODULE_RST 25    //LORA_RST
+#  endif
+#  ifndef RF_MODULE_CS
+#    define RF_MODULE_CS 0      //LORA_CS
+#  endif
+#endif
+
+
 #ifdef RF_SX1276
 #  define RF_MODULE_RECEIVER_GPIO RF_MODULE_DIO2
 #  define STR_MODULE              "SX1276"
