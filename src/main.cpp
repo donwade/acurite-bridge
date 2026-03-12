@@ -1,5 +1,6 @@
 #include <HardwareSerial.h>
 #include <ArduinoLog.h>
+#include <M5Stack.h>
 
 #include "weatherBridge/LokiLogger.hpp"
 #include "weatherBridge/WeatherBridge.hpp"
@@ -18,7 +19,8 @@ void setup() {
 #else
     LokiLogger::beginNoop();
 #endif
-
+    M5.begin(true, true, true, false);
+    M5.Lcd.fillScreen(RED);
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "EndlessLoop"
     if (!SPIFFS.begin(false)) {

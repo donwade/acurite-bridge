@@ -169,9 +169,21 @@
 #    define RF_MODULE_RST 25    //LORA_RST
 #  endif
 #  ifndef RF_MODULE_CS
-#    define RF_MODULE_CS 0      //LORA_CS
+#    define RF_MODULE_CS 27      //LORA_CS
 #  endif
+
+#  ifndef RF_MODULE_SCK 
+#    define RF_MODULE_SCK 18
+#  endif
+#  ifndef RF_MODULE_MISO 
+#    define RF_MODULE_MISO 38
+#  endif
+#  ifndef RF_MODULE_MOSI 
+#    define RF_MODULE_MOSI 23
+#  endif
+
 #endif
+
 
 
 #ifdef RF_SX1276

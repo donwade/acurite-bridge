@@ -140,17 +140,17 @@ rtl_433_ESP::rtl_433_ESP() {
  * @param inputPin - GPIO of receiver
  * @param receiveFrequency - receive frequency
  */
-void rtl_433_ESP::initReceiver(byte inputPin, float receiveFrequency) {
+void rtl_433_ESP::initReceiver(byte irqInputPin, float receiveFrequency) {
 #if defined(RF_SX1276) || defined(RF_SX1278)
   radio.reset();
 #endif
 
-  receiverGpio = digitalPinToInterrupt(inputPin);
+  receiverGpio = digitalPinToInterrupt(irqInputPin);
 #ifdef MEMORY_DEBUG
   logprintfLn(LOG_INFO, "Pre initReceiver: %d", ESP.getFreeHeap());
 #endif
 #ifdef DEMOD_DEBUG
-  logprintfLn(LOG_INFO, STR_MODULE " gpio receive pin: %d", inputPin);
+  logprintfLn(LOG_INFO, STR_MODULE " gpio receive pin: %d", irqInputPin);
   logprintfLn(LOG_INFO, STR_MODULE " receive frequency: %f", receiveFrequency);
 #endif
 
@@ -166,6 +166,8 @@ void rtl_433_ESP::initReceiver(byte inputPin, float receiveFrequency) {
   logprintfLn(LOG_INFO, STR_MODULE " SPI Config SCK: %d, MISO: %d, MOSI: %d, CS: %d", RF_MODULE_SCK, RF_MODULE_MISO, RF_MODULE_MOSI, RF_MODULE_CS);
 #  endif
   newSPI.begin(RF_MODULE_SCK, RF_MODULE_MISO, RF_MODULE_MOSI, RF_MODULE_CS);
+#else
+	#error WTF NO MOSI etc?
 #endif
 
   /*----------------------------- Initialize Transceiver -----------------------------*/
