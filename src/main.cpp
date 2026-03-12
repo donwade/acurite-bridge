@@ -25,7 +25,19 @@ void setup() {
     M5.Display.fillScreen(TFT_BLACK);                           
     M5.Display.setTextColor(TFT_GREEN);
     M5.Display.setCursor(0, 0);
-    M5.Display.printf("hi don %d", 6969);
+
+    https://m5stack.lang-ship.com/howto/m5gfx/font/
+    M5.Lcd.setFont(&fonts::FreeSansBold18pt7b);
+    M5.Display.printf("hi don %d\n", 6969);
+
+    M5.Display.setTextColor(TFT_RED);
+    M5.Lcd.setFont(&fonts::FreeMono9pt7b);
+    M5.Display.printf("hi sandi %d\n", 1234);
+
+    M5.Display.setTextColor(TFT_YELLOW);
+    M5.Lcd.setFont(&fonts::FreeMonoOblique12pt7b);
+    M5.Display.printf("hi siran %d\n", 1234);
+
 
     M5.Display.setTextColor(TFT_WHITE);
     M5.Display.setCursor(0, 10);
