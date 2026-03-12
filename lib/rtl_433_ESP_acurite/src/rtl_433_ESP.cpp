@@ -123,7 +123,7 @@ unsigned long _deafWorkaround = millis();
 #endif
 
 int16_t rtl_433_ESP::_interrupt = NOT_AN_INTERRUPT;
-static byte receiverGpio = -1;
+static byte receiverGpioIrq = -1;
 
 static TaskHandle_t rtl_433_ReceiverHandle;
 
@@ -145,7 +145,7 @@ void rtl_433_ESP::initReceiver(byte irqInputPin, float receiveFrequency) {
   radio.reset();
 #endif
 
-  receiverGpio = digitalPinToInterrupt(irqInputPin);
+  receiverGpioIrq = digitalPinToInterrupt(irqInputPin);
 #ifdef MEMORY_DEBUG
   logprintfLn(LOG_INFO, "Pre initReceiver: %d", ESP.getFreeHeap());
 #endif
@@ -379,7 +379,7 @@ void ICACHE_RAM_ATTR rtl_433_ESP::interruptHandler() {
 #ifdef SIGNAL_RSSI
     rssi[_nrpulses] = currentRssi;
 #endif
-    if (!digitalRead(receiverGpio)) {
+    if (!digitalRead(receiverGpioIrq)) {
       pulse[_nrpulses] = duration;
 
       //      _nrpulses = (uint16_t)((_nrpulses + 1) % PD_MAX_PULSES);
@@ -424,9 +424,9 @@ void rtl_433_ESP::resetReceiver() {
  * @param inputPin 
  */
 void rtl_433_ESP::enableReceiver() {
-  if (receiverGpio >= 0) {
-    pinMode(receiverGpio, INPUT);
-    attachInterrupt((uint8_t)receiverGpio, interruptHandler, CHANGE);
+  if (receiverGpioIrq >= 0) {
+    pinMode(receiverGpioIrq, INPUT);
+    attachInterrupt((uint8_t)receiverGpioIrq, interruptHandler, CHANGE);
     _enabledReceiver = true;
   }
 }
@@ -437,7 +437,7 @@ void rtl_433_ESP::enableReceiver() {
  */
 void rtl_433_ESP::disableReceiver() {
   _enabledReceiver = false;
-  detachInterrupt((uint8_t)receiverGpio);
+  detachInterrupt((uint8_t)receiverGpioIrq);
 }
 
 /**
