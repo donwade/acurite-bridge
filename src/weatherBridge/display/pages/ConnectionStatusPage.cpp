@@ -21,7 +21,7 @@ static const unsigned char PROGMEM image_wifi_bits[] = {0x01, 0xf0, 0x00, 0x06, 
                                                         0xa0, 0x00, 0x00, 0x40, 0x00, 0x00, 0x00, 0x00};
 
 
-ConnectionStatusPage::ConnectionStatusPage(Adafruit_GFX &display) : DisplayPage(display) {}
+ConnectionStatusPage::ConnectionStatusPage(MY_GFX &display) : DisplayPage(display) {}
 
 
 void ConnectionStatusPage::paint(WeatherBridgeContext context) {

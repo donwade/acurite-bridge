@@ -12,7 +12,7 @@ static const unsigned char PROGMEM image_weather_wind_bits[] = {0x00, 0x00, 0x00
                                                                 0x00, 0x10, 0x00, 0x10, 0x01, 0x20, 0x00, 0xc0};
 
 
-WeatherPage::WeatherPage(Adafruit_GFX &display) : DisplayPage(display) {}
+WeatherPage::WeatherPage(MY_GFX &display) : DisplayPage(display) {}
 
 void WeatherPage::paint(WeatherBridgeContext context) {
     char buf[10];

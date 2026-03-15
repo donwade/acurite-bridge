@@ -6,7 +6,7 @@
 
 class WeatherExportersPage : public DisplayPage {
 public:
-    explicit WeatherExportersPage(Adafruit_GFX &display);
+    explicit WeatherExportersPage(MY_GFX &display);
 
 private:
     void paint(WeatherBridgeContext context) override;

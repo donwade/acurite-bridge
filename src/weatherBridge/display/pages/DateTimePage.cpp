@@ -3,7 +3,7 @@
 #include "weatherBridge/arrayExtensions.hpp"
 #include "weatherBridge/display/pages/DateTimePage.hpp"
 
-DateTimePage::DateTimePage(Adafruit_GFX &display) : DisplayPage(display) {}
+DateTimePage::DateTimePage(MY_GFX &display) : DisplayPage(display) {}
 
 
 void DateTimePage::paint(WeatherBridgeContext context) {

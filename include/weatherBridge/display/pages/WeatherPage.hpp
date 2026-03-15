@@ -5,7 +5,7 @@
 
 class WeatherPage : public DisplayPage {
 public:
-    explicit WeatherPage(Adafruit_GFX &display);
+    explicit WeatherPage(MY_GFX &display);
 
 private:
     void paint(WeatherBridgeContext context) override;

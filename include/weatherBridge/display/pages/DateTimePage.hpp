@@ -6,7 +6,7 @@
 
 class DateTimePage : public DisplayPage {
 public:
-    explicit DateTimePage(Adafruit_GFX &display);
+    explicit DateTimePage(MY_GFX &display);
 
 private:
     void paint(WeatherBridgeContext context) override;

@@ -4,7 +4,7 @@
 static const unsigned char PROGMEM image_list_element_tick[] = {0x80, 0xc0, 0xe0};
 
 
-WeatherExportersPage::WeatherExportersPage(Adafruit_GFX &display) : DisplayPage(display) {}
+WeatherExportersPage::WeatherExportersPage(MY_GFX &display) : DisplayPage(display) {}
 
 void WeatherExportersPage::paint(WeatherBridgeContext context) {
     delegate.drawBitmap(3, 7, image_list_element_tick, 3, 3, 1);

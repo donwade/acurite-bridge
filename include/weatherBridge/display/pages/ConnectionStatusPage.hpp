@@ -6,7 +6,7 @@
 
 class ConnectionStatusPage : public DisplayPage {
 public:
-    explicit ConnectionStatusPage(Adafruit_GFX &display);
+    explicit ConnectionStatusPage(MY_GFX &display);
 
 private:
     void paint(WeatherBridgeContext context) override;
