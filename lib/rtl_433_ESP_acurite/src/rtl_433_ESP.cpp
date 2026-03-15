@@ -195,7 +195,7 @@ void rtl_433_ESP::initReceiver(byte irqInputPin, float receiveFrequency) {
   }
 
   state = radio.setCrcFiltering(false);
-  RADIOLIB_STATE(state, "setCrcFiltering");
+  RADIOLIB_STATE(state, "setCrcFiltering off");
 
 #ifdef RF_CC1101
   if (ookModulation) {
@@ -260,12 +260,18 @@ void rtl_433_ESP::initReceiver(byte irqInputPin, float receiveFrequency) {
     RADIOLIB_STATE(state, "OokFixedThreshold");
 
     state = radio.setBitRate(1.2);
+    logprintfLn(LOG_INFO, "setBitRate 1.2k");
     RADIOLIB_STATE(state, "setBitRate");
 
     state = radio.setRxBandwidth(SX127X_RXBANDWIDTH); // Lowering to 125 lowered number of received signals
+    logprintfLn(LOG_INFO, "SX127X_RXBANDWIDTH = %d", SX127X_RXBANDWIDTH);
     RADIOLIB_STATE(state, "setRxBandwidth");
 
-  } else {
+    //https://www.google.com/search?client=ubuntu-sn&channel=fs&q=Acurite-5n1+vs+Acurite-511
+
+  } 
+  else
+  {
     // From https://github.com/matthias-bs/BresserWeatherSensorReceiver/issues/41#issuecomment-1458166772
     // radio.begin(868.3, 17.24, 40, 270, 10, 32);
     // carrier frequency:                   868.3 MHz
@@ -390,7 +396,7 @@ void ICACHE_RAM_ATTR rtl_433_ESP::interruptHandler() {
 
         _nrpulses = (uint16_t)((_nrpulses + 1) % PD_MAX_PULSES);
       } else if (_nrpulses > 1) { // Have we received any data ?
-        // We received a random positive blib
+        // We received a random positive blip
         gap[_nrpulses - 1] += duration;
       } else {
         gap[_nrpulses] = duration;
