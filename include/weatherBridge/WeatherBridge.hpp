@@ -24,7 +24,6 @@
 class WeatherBridge {
 private:
     fs::FS &fs;
-    InputPullUpButton configModeButton;
 
     bool isConfigurationMode = false;
     bool ntpTimeSyncOk = false;
@@ -57,6 +56,7 @@ private:
 
 public:
     WeatherBridge(fs::FS &fs, int configModeButtonPin) noexcept;
+    InputPullUpButton configModeButton;
 
     void begin();
 

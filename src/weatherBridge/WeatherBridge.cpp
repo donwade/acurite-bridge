@@ -1,6 +1,6 @@
 #include "weatherBridge/WeatherBridge.hpp"
 #include "weatherBridge/SettingsServer.hpp"
-
+#include "weatherBridge/InputPullUpButton.hpp"
 WeatherBridge::WeatherBridge(FS &fs, int configModeButtonPin) noexcept
         : fs(fs),
           settingStore(FSSettingStore(fs)),

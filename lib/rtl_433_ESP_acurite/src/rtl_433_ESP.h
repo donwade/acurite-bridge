@@ -157,16 +157,16 @@
 #    define RF_SX1276 "SX1276"
 #  endif
 #  ifndef RF_MODULE_DIO0
-#    define RF_MODULE_DIO0 -1   //LORA_IRQ
+#    define RF_MODULE_DIO0 35   //LORA_IRQ
 #  endif
 #  ifndef RF_MODULE_DIO1
 #    define RF_MODULE_DIO1 -1   //LORA_D1
 #  endif
 #  ifndef RF_MODULE_DIO2
-#    define RF_MODULE_DIO2 35   //LORA_D2
+#    define RF_MODULE_DIO2 25   //LORA_D2 steals old RST
 #  endif
 #  ifndef RF_MODULE_RST
-#    define RF_MODULE_RST 25    //LORA_RST
+#    define RF_MODULE_RST -1    //LORA_RST
 #  endif
 #  ifndef RF_MODULE_CS
 #    define RF_MODULE_CS 27      //LORA_CS

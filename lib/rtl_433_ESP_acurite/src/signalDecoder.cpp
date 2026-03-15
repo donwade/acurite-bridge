@@ -213,6 +213,14 @@ void _setCallback(rtl_433_ESPCallBack callback, char* messageBuffer,
   cfg->bufferSize = bufferSize;
 }
 
+/**
+* rtlDebug
+* 0=normal
+* 1=verbose
+* 2=verbose decoders
+* 3=debug decoders
+* 4=trace decoding
+*/
 void _setDebug(int debug) {
   rtlVerbose = debug;
   logprintfLn(LOG_INFO, "Setting rtl_433 debug to: %d", rtlVerbose);

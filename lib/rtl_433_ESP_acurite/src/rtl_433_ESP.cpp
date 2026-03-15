@@ -426,9 +426,13 @@ void rtl_433_ESP::resetReceiver() {
 void rtl_433_ESP::enableReceiver() {
   if (receiverGpioIrq >= 0) {
     pinMode(receiverGpioIrq, INPUT);
+    
+	logprintfLn(LOG_INFO, "Pin %d has interrupt handler %d", receiverGpioIrq);
     attachInterrupt((uint8_t)receiverGpioIrq, interruptHandler, CHANGE);
     _enabledReceiver = true;
-  }
+     
+	setDebug(3);
+   }
 }
 
 /**
@@ -720,6 +724,16 @@ void rtl_433_ESP::setOOKThreshold(int newOokThreshold) {
  * 
  * @param debug 
  */
+
+  /**
+   * rtlDebug
+   * 0=normal
+   * 1=verbose
+   * 2=verbose decoders
+   * 3=debug decoders
+   * 4=trace decoding
+   */
+   
 void rtl_433_ESP::setDebug(int debug) {
   rtlVerbose = debug;
   logprintfLn(LOG_INFO, "Setting rtl_433 debug to: %d", rtlVerbose);

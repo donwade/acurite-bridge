@@ -58,4 +58,5 @@ void setup() {
 
 void loop() {
     weatherBridge.loop();
+    // testing weatherBridge.configModeButton.isPressed();
 }
