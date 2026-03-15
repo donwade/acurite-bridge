@@ -1,4 +1,6 @@
 #pragma once
+#include "M5Unified.h"
+#include "M5GFX.h"
 
 #include "Adafruit_GFX.h"
 #include "weatherBridge/display/DisplayPage.hpp"
