@@ -195,7 +195,7 @@
 #    define RF_MODULE_DIO1 -1   //LORA_D1
 #  endif
 #  ifndef RF_MODULE_DIO2
-#    define RF_MODULE_DIO2 7   //LORA_D2 steals old RST
+#    define RF_MODULE_DIO2 5   //LORA_D2 steals old RST
 #  endif
 #  ifndef RF_MODULE_RST
 #    define RF_MODULE_RST -1    //LORA_RST screw reset use apb power dn/up!
