@@ -184,6 +184,37 @@
 
 #endif
 
+#if defined(ESP32S3)
+#  ifndef RF_SX1278
+#    define RF_SX1276 "SX1276"
+#  endif
+#  ifndef RF_MODULE_DIO0
+#    define RF_MODULE_DIO0 -1   //LORA_IRQ
+#  endif
+#  ifndef RF_MODULE_DIO1
+#    define RF_MODULE_DIO1 -1   //LORA_D1
+#  endif
+#  ifndef RF_MODULE_DIO2
+#    define RF_MODULE_DIO2 7   //LORA_D2 steals old RST
+#  endif
+#  ifndef RF_MODULE_RST
+#    define RF_MODULE_RST -1    //LORA_RST screw reset use apb power dn/up!
+#  endif
+#  ifndef RF_MODULE_CS
+#    define RF_MODULE_CS   6      //LORA_CS
+#  endif
+
+#  ifndef RF_MODULE_SCK 
+#    define RF_MODULE_SCK   36
+#  endif
+#  ifndef RF_MODULE_MISO 
+#    define RF_MODULE_MISO  35
+#  endif
+#  ifndef RF_MODULE_MOSI 
+#    define RF_MODULE_MOSI  37
+#  endif
+
+#endif
 
 
 #ifdef RF_SX1276

@@ -978,7 +978,7 @@ void data_acquired_handler(r_device* r_dev, data_t* data) {
               DATA_INT, cfg->demod->pulse_data.signalDuration, NULL);
   data_print_jsons(data, cfg->messageBuffer, cfg->bufferSize);
 #ifdef DEMOD_DEBUG
-  logprintfLn(LOG_INFO, "data_output %s", cfg->messageBuffer);
+  logprintfLn(LOG_INFO, "data_output %s\n", cfg->messageBuffer);
 #endif
 
   // callback to external function that receives message from device (
