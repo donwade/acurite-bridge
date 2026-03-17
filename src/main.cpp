@@ -1,7 +1,14 @@
 #include <HardwareSerial.h>
 #include <ArduinoLog.h>
 //#include <M5Stack.h>
-#include <M5Unified.h>
+
+#ifdef ARDUINO_M5STACK_CORES3
+    #include "M5CoreS3.h" 
+    #define HW CoreS3
+#else
+	#include <M5Unified.h>
+	#define HW M5
+#endif
 
 #include "weatherBridge/LokiLogger.hpp"
 #include "weatherBridge/WeatherBridge.hpp"
@@ -20,27 +27,41 @@ void setup() {
 #else
     LokiLogger::beginNoop();
 #endif
-    M5.begin();
+
+#ifdef ARDUINO_M5STACK_CORES3
+	auto cfg = M5.config();
+	 HW.begin(cfg);
+	 int textsize = HW.Display.height() / 60;
+	 if (textsize == 0) {
+		 textsize = 1;
+	 }
+	 HW.Display.setTextSize(textsize);
+#else
+    HW.begin();
+#endif
     
-    M5.Display.fillScreen(TFT_BLACK);                           
-    M5.Display.setTextColor(TFT_GREEN);
-    M5.Display.setCursor(0, 0);
+    HW.Display.fillScreen(TFT_BLACK);                           
+    HW.Display.setTextColor(TFT_GREEN);
+    HW.Display.setCursor(0, 0);
 
-    https://m5stack.lang-ship.com/howto/m5gfx/font/
-    M5.Lcd.setFont(&fonts::FreeSansBold18pt7b);
-    M5.Display.printf("hi don %d\n", 6969);
+    https://HWstack.lang-ship.com/howto/m5gfx/font/
+    HW.Lcd.setFont(&fonts::FreeSansBold18pt7b);
+    HW.Display.printf("hi don %d\n", 6969);
 
-    M5.Display.setTextColor(TFT_RED);
-    M5.Lcd.setFont(&fonts::FreeMono9pt7b);
-    M5.Display.printf("hi sandi %d\n", 1234);
+    HW.Display.setTextColor(TFT_RED);
+    HW.Lcd.setFont(&fonts::FreeMono9pt7b);
+    HW.Display.printf("hi sandi %d\n", 1234);
 
-    M5.Display.setTextColor(TFT_YELLOW);
-    M5.Lcd.setFont(&fonts::FreeMonoOblique12pt7b);
-    M5.Display.printf("hi siran %d\n", 1234);
+    HW.Display.setTextColor(TFT_YELLOW);
+    HW.Lcd.setFont(&fonts::FreeMonoOblique12pt7b);
+    HW.Display.printf("hi siran %d\n", 1234);
 
 
-    M5.Display.setTextColor(TFT_WHITE);
-    M5.Display.setCursor(0, 10);
+    HW.Display.setTextColor(TFT_WHITE);
+    HW.Display.setCursor(0, 10);
+    HW.Display.display();
+    
+    
     
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "EndlessLoop"
