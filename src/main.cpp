@@ -1,14 +1,10 @@
 #include <HardwareSerial.h>
 #include <ArduinoLog.h>
-//#include <M5Stack.h>
 
-#ifdef ARDUINO_M5STACK_CORES3
-    #include "M5CoreS3.h" 
-    #define HW CoreS3
-#else
+#ifdef ARDUINO_M5STACK_Core2
 	#include <M5Unified.h>
-	#define HW M5
 #endif
+
 
 #include "weatherBridge/LokiLogger.hpp"
 #include "weatherBridge/WeatherBridge.hpp"
@@ -28,39 +24,30 @@ void setup() {
     LokiLogger::beginNoop();
 #endif
 
-#ifdef ARDUINO_M5STACK_CORES3
-	auto cfg = M5.config();
-	 HW.begin(cfg);
-	 int textsize = HW.Display.height() / 60;
-	 if (textsize == 0) {
-		 textsize = 1;
-	 }
-	 HW.Display.setTextSize(textsize);
-#else
-    HW.begin();
-#endif
+    M5.begin();
     
-    HW.Display.fillScreen(TFT_BLACK);                           
-    HW.Display.setTextColor(TFT_GREEN);
-    HW.Display.setCursor(0, 0);
+    M5.Display.fillScreen(TFT_BLACK);                           
+    M5.Display.setTextColor(TFT_GREEN);
+    M5.Display.setCursor(0, 0);
+    M5.Display.display(); delay(1000);
 
-    https://HWstack.lang-ship.com/howto/m5gfx/font/
-    HW.Lcd.setFont(&fonts::FreeSansBold18pt7b);
-    HW.Display.printf("hi don %d\n", 6969);
+    // https://HWstack.lang-ship.com/howto/m5gfx/font/
+    M5.Lcd.setFont(&fonts::FreeSansBold18pt7b);
+    M5.Display.printf("hi don %d\n", 6969);
+    M5.Display.display(); delay(1000);
 
-    HW.Display.setTextColor(TFT_RED);
-    HW.Lcd.setFont(&fonts::FreeMono9pt7b);
-    HW.Display.printf("hi sandi %d\n", 1234);
+    M5.Display.setTextColor(TFT_RED);
+    M5.Lcd.setFont(&fonts::FreeMono9pt7b);
+    M5.Display.printf("hi sandi %d\n", 1234);
+    M5.Display.display(); delay(1000);
 
-    HW.Display.setTextColor(TFT_YELLOW);
-    HW.Lcd.setFont(&fonts::FreeMonoOblique12pt7b);
-    HW.Display.printf("hi siran %d\n", 1234);
+    M5.Display.setTextColor(TFT_YELLOW);
+    M5.Lcd.setFont(&fonts::FreeMonoOblique12pt7b);
+    M5.Display.printf("hi siran %d\n", 1234);
+    M5.Display.display(); delay(1000);
 
-
-    HW.Display.setTextColor(TFT_WHITE);
-    HW.Display.setCursor(0, 10);
-    HW.Display.display();
-    
+	WAIT
+   
     
     
 #pragma clang diagnostic push
@@ -72,7 +59,8 @@ void setup() {
         }
 #pragma clang diagnostic pop
     }
-
+    
+	WAIT
     weatherBridge.begin();
     LokiLogger::Instance.writeLog("WeatherExporter initialized");
 }
