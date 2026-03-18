@@ -1,4 +1,9 @@
-#include "Adafruit_SSD1306.h"
+
+#ifndef ARDUINO_M5STACK_Core2
+  #include "Adafruit_SSD1306.h"
+#else
+  #include "M5Unified.h"
+#endif
 #include "ArduinoLog.h"
 
 #include "weatherBridge/display/DisplayPage.hpp"
@@ -21,8 +26,11 @@ static const unsigned char PROGMEM image_weather_cloud_sunny_bits[] = {0x00, 0x2
 
 
 WeatherBridgeDisplay::WeatherBridgeDisplay()
+#ifndef ARDUINO_M5STACK_Core2
         : delegate(WEATHER_EXPORTER_DISPLAY_SCREEN_WIDTH, WEATHER_EXPORTER_DISPLAY_SCREEN_HEIGHT, &Wire,
-                   WEATHER_EXPORTER_DISPLAY_OLED_RESET) {}
+                   WEATHER_EXPORTER_DISPLAY_OLED_RESET)
+#endif
+{}
 
 WeatherBridgeDisplay::~WeatherBridgeDisplay() {
     for (auto &page: pages) {
@@ -32,7 +40,10 @@ WeatherBridgeDisplay::~WeatherBridgeDisplay() {
 
 void WeatherBridgeDisplay::begin() {
     Log.noticeln("Initializing WeatherBridgeDisplay");
-    if (delegate.begin(SSD1306_SWITCHCAPVCC, WEATHER_EXPORTER_DISPLAY_I2C_ADDR)) {
+#ifndef ARDUINO_M5STACK_Core2
+    if (delegate.begin(SSD1306_SWITCHCAPVCC, WEATHER_EXPORTER_DISPLAY_I2C_ADDR)) 
+#endif
+    {
         delegate.clearDisplay();
         paintSplash();
         delegate.display();

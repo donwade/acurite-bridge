@@ -1,6 +1,11 @@
 #pragma once
-
-#include "Adafruit_SSD1306.h"
+#ifndef ARDUINO_M5STACK_Core2
+  #include "Adafruit_SSD1306.h"
+  #define MY_GFX Adafruit_SSD1306
+#else
+  #include "M5Unified.h"
+  #define  MY_GFX M5GFX
+#endif
 
 #include "weatherBridge/types.hpp"
 #include "weatherBridge/WeatherBridgeContext.hpp"
@@ -12,7 +17,7 @@
 
 class WeatherBridgeDisplay {
 private:
-    Adafruit_SSD1306 delegate;
+    MY_GFX delegate;
     DisplayPage *pages[4]{
             new ConnectionStatusPage(delegate),
             new DateTimePage(delegate),
