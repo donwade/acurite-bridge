@@ -3,6 +3,7 @@
 
 #ifdef ARDUINO_M5STACK_Core2
 	#include <M5Unified.h>
+	#include "SingleStep.hpp"
 #endif
 
 

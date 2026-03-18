@@ -5,6 +5,7 @@
   #include "M5Unified.h"
 #endif
 #include "ArduinoLog.h"
+#include "SingleStep.hpp"
 
 #include "weatherBridge/display/DisplayPage.hpp"
 #include "weatherBridge/display/WeatherBridgeDisplay.hpp"
@@ -44,7 +45,9 @@ void WeatherBridgeDisplay::begin() {
     if (delegate.begin(SSD1306_SWITCHCAPVCC, WEATHER_EXPORTER_DISPLAY_I2C_ADDR)) 
 #endif
     {
+    	WAIT
         delegate.clearDisplay();
+        WAIT
         paintSplash();
         delegate.display();
         lastPageSwitchMillis = millis();
@@ -72,25 +75,30 @@ void WeatherBridgeDisplay::nextPage(WeatherBridgeContext context) {
     size_t totalPages = ArraySize(pages);
     Log.traceln(F("WeatherBridgeDisplay: Painting page %d of %d"), nextPageIndex + 1, totalPages);
 
+	WAIT
     delegate.clearDisplay();
+    WAIT
     pages[nextPageIndex]->paint(context);
     delegate.display();
     nextPageIndex = (nextPageIndex + 1) % totalPages;
     Log.traceln(F("WeatherBridgeDisplay: Painting complete"));
+    WAIT
 }
 
 void WeatherBridgeDisplay::paintSplash() {
-    delegate.setTextColor(1);
+    delegate.setTextColor( TFT_GREEN, TFT_BLACK );
     delegate.setTextSize(2);
     delegate.setCursor(7, 6);
     delegate.setTextWrap(false);
     delegate.print(F("Weather"));
-    delegate.setTextColor(1);
+    
+    delegate.setTextColor(TFT_YELLOW, TFT_BLACK);
     delegate.setTextSize(2);
     delegate.setCursor(7, 25);
     delegate.setTextWrap(false);
     delegate.print(F("Bridge"));
-    delegate.setTextColor(1);
+    
+    delegate.setTextColor(TFT_RED, TFT_BLACK);
     delegate.setTextSize(1);
     delegate.setCursor(7, 45);
     delegate.setTextWrap(true);
@@ -98,4 +106,6 @@ void WeatherBridgeDisplay::paintSplash() {
     delegate.setCursor(7, 55);
     delegate.print(F("acurite-bridge"));
     delegate.drawBitmap(105, 5, image_weather_cloud_sunny_bits, 17, 16, 1);
+    delegate.display();
+    WAIT
 }

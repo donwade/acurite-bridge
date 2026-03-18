@@ -17,7 +17,8 @@
 
 class WeatherBridgeDisplay {
 private:
-    MY_GFX delegate;
+    MY_GFX &delegate = M5.Display;
+    
     DisplayPage *pages[4]{
             new ConnectionStatusPage(delegate),
             new DateTimePage(delegate),

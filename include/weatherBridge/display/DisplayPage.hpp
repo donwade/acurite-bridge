@@ -4,7 +4,7 @@
 
    #include "M5Unified.h"
    #include "M5GFX.h"
-	#define MY_GFX M5GFX
+   #define MY_GFX M5GFX
 #else
 	#include "Adafruit_GFX.h"
 	#define MY_GFX Adafruit_GFX

@@ -9,11 +9,11 @@
 #define FG_CYAN       "\033[0;36m"
 #define FG_WHITE      "\033[0;37m"
 
-int wait(const char *filename, uint32_t line)
+int wait(const char *filename, uint32_t line, const char *function )
 {
 	int key;
 	while (Serial.available()) Serial.read();
-	Serial.printf(FG_YELLOW "%s:%d >> " FG_DONE, filename, line);
+	Serial.printf(FG_YELLOW "%s:%d in (%s) >> " FG_DONE, filename, line, function);
 	while (!Serial.available()) delay(50);
 	key = Serial.read();
 	Serial.println();
