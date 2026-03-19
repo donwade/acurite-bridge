@@ -1,7 +1,6 @@
 #pragma once
 
 #ifdef ARDUINO_M5STACK_Core2
-
    #include "M5Unified.h"
    #include "M5GFX.h"
    #define MY_GFX M5GFX

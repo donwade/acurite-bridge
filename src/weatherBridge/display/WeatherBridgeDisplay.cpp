@@ -86,25 +86,46 @@ void WeatherBridgeDisplay::nextPage(WeatherBridgeContext context) {
 }
 
 void WeatherBridgeDisplay::paintSplash() {
+	int32_t height = 0;
+	
+		height += delegate.fontHeight(delegate.getFont());
+		Serial.printf("height = %d\n", height);
+		delegate.setCursor(7, height);
+	
     delegate.setTextColor( TFT_GREEN, TFT_BLACK );
     delegate.setTextSize(2);
-    delegate.setCursor(7, 6);
     delegate.setTextWrap(false);
     delegate.print(F("Weather"));
     
+	    height += delegate.fontHeight(delegate.getFont());
+	    Serial.printf("height = %d\n", height);
+	    delegate.setCursor(7, height);
+    
     delegate.setTextColor(TFT_YELLOW, TFT_BLACK);
     delegate.setTextSize(2);
-    delegate.setCursor(7, 25);
     delegate.setTextWrap(false);
     delegate.print(F("Bridge"));
     
+	    height += delegate.fontHeight(delegate.getFont());
+	    Serial.printf("height = %d\n", height);
+	    delegate.setCursor(7, height);
+    
     delegate.setTextColor(TFT_RED, TFT_BLACK);
     delegate.setTextSize(1);
-    delegate.setCursor(7, 45);
     delegate.setTextWrap(true);
-    delegate.print(F("github.com/shchuko/"));
-    delegate.setCursor(7, 55);
+    delegate.print(F("github.com/donwade/"));
+    
+	    height += delegate.fontHeight(delegate.getFont());
+	    Serial.printf("height = %d\n", height);
+	    delegate.setCursor(7, height);
+
+    delegate.setTextColor(TFT_CYAN, TFT_BLACK);
     delegate.print(F("acurite-bridge"));
+    
+	    height += delegate.fontHeight(delegate.getFont());
+	    Serial.printf("height = %d\n", height);
+		delegate.setCursor(7, height);
+
     delegate.drawBitmap(105, 5, image_weather_cloud_sunny_bits, 17, 16, 1);
     delegate.display();
     WAIT
