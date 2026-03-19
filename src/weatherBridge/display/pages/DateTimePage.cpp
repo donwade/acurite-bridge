@@ -8,6 +8,8 @@ DateTimePage::DateTimePage(MY_GFX &display) : DisplayPage(display) {}
 
 void DateTimePage::paint(WeatherBridgeContext context) {
     char charBuf[64];
+    uint32_t height = 0;
+
     for (auto &item: charBuf) { item = '-'; }
     struct tm timeInfo{};
 
@@ -16,44 +18,60 @@ void DateTimePage::paint(WeatherBridgeContext context) {
         Log.warningln("Failed to get local time with getLocalTime()");
     }
 
-    delegate.setTextColor(1);
+	height += delegate.fontHeight(delegate.getFont());
+	Serial.printf("height = %d\n", height);
+	delegate.setCursor(5, height);
+
+    delegate.setTextColor(TFT_YELLOW);
     delegate.setTextSize(2);
-    delegate.setCursor(36, 4);
+    delegate.setCursor(36, height);
     delegate.setTextWrap(false);
     if (strftime(charBuf, ArraySize(charBuf), "%H:%M", &timeInfo) == 0) {
         Log.warningln("Failed to extract HH:mm with strftime()");
     }
     delegate.print(charBuf);
-    delegate.setTextColor(1);
+
+	height += delegate.fontHeight(delegate.getFont());
+	Serial.printf("height = %d\n", height);
+	delegate.setCursor(5, height);
+
+    
+    delegate.setTextColor(TFT_YELLOW);
     delegate.setTextSize(2);
-    delegate.setCursor(5, 22);
     delegate.setTextWrap(false);
     if (strftime(charBuf, ArraySize(charBuf), "%d-%m-%Y", &timeInfo) == 0) {
         Log.warningln("Failed to extract HH:mm with strftime()");
     }
     delegate.print(charBuf);
-    delegate.setTextColor(1);
+    
+	height += delegate.fontHeight(delegate.getFont());
+	Serial.printf("height = %d\n", height);
+	delegate.setCursor(5, height);
+
+    delegate.setTextColor(TFT_YELLOW);
     delegate.setTextSize(1);
-    delegate.setCursor(5, 45);
     delegate.setTextWrap(false);
     delegate.print("Timezone");
-    delegate.setTextColor(1);
+
+	height += delegate.fontHeight(delegate.getFont());
+	Serial.printf("height = %d\n", height);
+	delegate.setCursor(5, height);
+    
+    delegate.setTextColor(TFT_YELLOW);
     delegate.setTextSize(1);
-    delegate.setCursor(5, 54);
-    delegate.setTextWrap(false);
-    delegate.print("NTP");
-    delegate.setTextColor(1);
-    delegate.setTextSize(1);
-    delegate.setCursor(70, 45);
+    delegate.setCursor(70, height);
     delegate.setTextWrap(false);
     if (strftime(charBuf, ArraySize(charBuf), "%Z%z", &timeInfo) == 0) {
         Log.warningln("Failed to extract TZ with strftime()");
     }
-    delegate.print(charBuf);
+    delegate.print(charBuf);  // print local TZ.
+	
+	height += delegate.fontHeight(delegate.getFont());
+	Serial.printf("height = %d\n", height);
+	delegate.setCursor(5, height);
 
-    delegate.setTextColor(1);
+    delegate.setTextColor(TFT_YELLOW);
     delegate.setTextSize(1);
-    delegate.setCursor(70, 54);
     delegate.setTextWrap(false);
     if (context.ntpTimeSyncOk) {
         delegate.print("SYNC OK");

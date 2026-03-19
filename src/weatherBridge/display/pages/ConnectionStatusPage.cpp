@@ -26,12 +26,16 @@ ConnectionStatusPage::ConnectionStatusPage(MY_GFX &display) : DisplayPage(displa
 
 void ConnectionStatusPage::paint(WeatherBridgeContext context) {
     // Wi-Fi details
+    uint32_t height = 0;
     if (context.isConfigurationMode) {
         delegate.drawBitmap(3, 7, image_menu_tools_bits, 15, 16, 1);
 
-        delegate.setTextColor(1);
+		    height += delegate.fontHeight(delegate.getFont());
+		    Serial.printf("height = %d\n", height);
+		    delegate.setCursor(22, height);
+
+        delegate.setTextColor(TFT_YELLOW);
         delegate.setTextSize(1);
-        delegate.setCursor(22, 3);
         delegate.setTextWrap(false);
         if (context.wifiApContext.isActive()) {
             delegate.print("SSID: " + context.wifiApContext.getSsid());
@@ -39,9 +43,12 @@ void ConnectionStatusPage::paint(WeatherBridgeContext context) {
             delegate.print("AP_INIT_ERROR");
         }
 
-        delegate.setTextColor(1);
+			height += delegate.fontHeight(delegate.getFont());
+			Serial.printf("height = %d\n", height);
+			delegate.setCursor(22, height);
+		
+        delegate.setTextColor(TFT_YELLOW);
         delegate.setTextSize(1);
-        delegate.setCursor(22, 12);
         delegate.setTextWrap(false);
         if (context.wifiApContext.isActive()) {
             if (context.wifiApContext.getPassword().isEmpty()) {
@@ -51,7 +58,11 @@ void ConnectionStatusPage::paint(WeatherBridgeContext context) {
             }
         }
 
-        delegate.setTextColor(1);
+			height += delegate.fontHeight(delegate.getFont());
+			Serial.printf("height = %d\n", height);
+			delegate.setCursor(22, height);
+		
+        delegate.setTextColor(TFT_YELLOW);
         delegate.setTextSize(1);
         delegate.setCursor(22, 21);
         delegate.setTextWrap(false);
@@ -63,9 +74,12 @@ void ConnectionStatusPage::paint(WeatherBridgeContext context) {
     } else {
         delegate.drawBitmap(1, 7, image_wifi_bits, 19, 16, 1);
 
-        delegate.setTextColor(1);
+		height += delegate.fontHeight(delegate.getFont());
+		Serial.printf("height = %d\n", height);
+		delegate.setCursor(22, height);
+		
+        delegate.setTextColor(TFT_YELLOW);
         delegate.setTextSize(1);
-        delegate.setCursor(22, 3);
         delegate.setTextWrap(false);
         const String &settingsSsid = context.settings.getWlanSsid();
         const String &activeSsid = context.wifiConnectionStatus.getSsid();
@@ -80,9 +94,12 @@ void ConnectionStatusPage::paint(WeatherBridgeContext context) {
             delegate.print("Not Configured");
         }
 
-        delegate.setTextColor(1);
+			height += delegate.fontHeight(delegate.getFont());
+			Serial.printf("height = %d\n", height);
+			delegate.setCursor(22, height);
+			
+        delegate.setTextColor(TFT_YELLOW);
         delegate.setTextSize(1);
-        delegate.setCursor(22, 12);
         delegate.setTextWrap(false);
         if (isConnected) {
             delegate.printf("RSSI: %d", rssi);
@@ -99,9 +116,12 @@ void ConnectionStatusPage::paint(WeatherBridgeContext context) {
 
     delegate.drawBitmap(2, 42, image_cloud_bits, 17, 16, 1);
 
-    delegate.setTextColor(1);
+		height += delegate.fontHeight(delegate.getFont());
+		Serial.printf("height = %d\n", height);
+		delegate.setCursor(22, height);
+	
+    delegate.setTextColor(TFT_YELLOW);
     delegate.setTextSize(1);
-    delegate.setCursor(21, 35);
     delegate.setTextWrap(false);
     if (isStationSelected) {
         delegate.print("Acurite 5n1");
@@ -109,23 +129,34 @@ void ConnectionStatusPage::paint(WeatherBridgeContext context) {
         delegate.print("Not Configured");
     }
 
+		height += delegate.fontHeight(delegate.getFont());
+		Serial.printf("height = %d\n", height);
+		delegate.setCursor(22, height);
+	
     if (isStationSelected) {
-        delegate.setTextColor(1);
+        delegate.setTextColor(TFT_YELLOW);
         delegate.setTextSize(1);
-        delegate.setCursor(21, 44);
         delegate.setTextWrap(false);
 
         delegate.printf("ID: %s", stationId.c_str());
     }
 
-    delegate.setTextColor(1);
+		height += delegate.fontHeight(delegate.getFont());
+		Serial.printf("height = %d\n", height);
+		delegate.setCursor(22, height);
+	
+    delegate.setTextColor(TFT_YELLOW);
     delegate.setTextSize(1);
-    delegate.setCursor(21, 53);
     delegate.setTextWrap(false);
     if (isConnected) {
         delegate.printf("RSSI: %d", rssi);
     } else if (isStationSelected) {
         delegate.print("No connection");
     }
+
+		height += delegate.fontHeight(delegate.getFont());
+		Serial.printf("height = %d\n", height);
+		delegate.setCursor(22, height);
+	
 }
 

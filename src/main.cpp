@@ -46,10 +46,6 @@ void setup() {
     M5.Lcd.setFont(&fonts::FreeMonoOblique12pt7b);
     M5.Display.printf("hi siran %d\n", 1234);
     M5.Display.display(); delay(1000);
-
-	WAIT
-   
-    
     
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "EndlessLoop"
@@ -60,8 +56,6 @@ void setup() {
         }
 #pragma clang diagnostic pop
     }
-    
-	WAIT
     weatherBridge.begin();
     LokiLogger::Instance.writeLog("WeatherExporter initialized");
 }

@@ -45,9 +45,7 @@ void WeatherBridgeDisplay::begin() {
     if (delegate.begin(SSD1306_SWITCHCAPVCC, WEATHER_EXPORTER_DISPLAY_I2C_ADDR)) 
 #endif
     {
-    	WAIT
         delegate.clearDisplay();
-        WAIT
         paintSplash();
         delegate.display();
         lastPageSwitchMillis = millis();
@@ -74,15 +72,11 @@ void WeatherBridgeDisplay::refresh(WeatherBridgeContext context) {
 void WeatherBridgeDisplay::nextPage(WeatherBridgeContext context) {
     size_t totalPages = ArraySize(pages);
     Log.traceln(F("WeatherBridgeDisplay: Painting page %d of %d"), nextPageIndex + 1, totalPages);
-
-	WAIT
     delegate.clearDisplay();
-    WAIT
     pages[nextPageIndex]->paint(context);
     delegate.display();
     nextPageIndex = (nextPageIndex + 1) % totalPages;
     Log.traceln(F("WeatherBridgeDisplay: Painting complete"));
-    WAIT
 }
 
 void WeatherBridgeDisplay::paintSplash() {
@@ -128,5 +122,4 @@ void WeatherBridgeDisplay::paintSplash() {
 
     delegate.drawBitmap(105, 5, image_weather_cloud_sunny_bits, 17, 16, 1);
     delegate.display();
-    WAIT
 }

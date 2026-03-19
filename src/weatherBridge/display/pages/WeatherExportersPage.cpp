@@ -8,54 +8,77 @@ WeatherExportersPage::WeatherExportersPage(MY_GFX &display) : DisplayPage(displa
 
 void WeatherExportersPage::paint(WeatherBridgeContext context) {
     delegate.drawBitmap(3, 7, image_list_element_tick, 3, 3, 1);
-    delegate.setTextColor(1);
+
+    uint32_t height = 0;
+    
+	height += delegate.fontHeight(delegate.getFont());
+	Serial.printf("height = %d\n", height);
+	delegate.setCursor(7, height);
+	
+    delegate.setTextColor(TFT_GREEN);
     delegate.setTextSize(1);
-    delegate.setCursor(7, 3);
     delegate.setTextWrap(false);
     delegate.print("PWS Weather");
+
+	height += delegate.fontHeight(delegate.getFont());
+	Serial.printf("height = %d\n", height);
+	
+	delegate.setCursor(7, height);
+    
     delegate.drawLine(72, 9, 82, 9, 1);
-    delegate.setTextColor(1);
+    delegate.setTextColor(TFT_GREEN);
     delegate.setTextSize(1);
-    delegate.setCursor(84, 3);
+    delegate.setCursor(84, height);
     delegate.setTextWrap(false);
     delegate.print(getWeatherExporterStatusName(context.exporters.getPwsWeatherExporterStatus()));
 
+	height += delegate.fontHeight(delegate.getFont());
+	Serial.printf("height = %d\n", height);
+	delegate.setCursor(7, height);
+
     delegate.drawBitmap(3, 17, image_list_element_tick, 3, 3, 1);
-    delegate.setTextColor(1);
+    delegate.setTextColor(TFT_BLUE);
     delegate.setTextSize(1);
-    delegate.setCursor(7, 13);
     delegate.setTextWrap(false);
     delegate.print("Windy");
     delegate.drawLine(37, 19, 82, 19, 1);
-    delegate.setTextColor(1);
+    delegate.setTextColor(TFT_YELLOW);
     delegate.setTextSize(1);
-    delegate.setCursor(84, 13);
+    delegate.setCursor(84, height);
+    
     delegate.setTextWrap(false);
     delegate.print(getWeatherExporterStatusName(context.exporters.getWindyExporterStatus()));
 
+	height += delegate.fontHeight(delegate.getFont());
+	Serial.printf("height = %d\n", height);
+	delegate.setCursor(7, height);
+
     delegate.drawBitmap(3, 27, image_list_element_tick, 3, 3, 1);
-    delegate.setTextColor(1);
+    delegate.setTextColor(TFT_GREEN);
     delegate.setTextSize(1);
-    delegate.setCursor(7, 23);
     delegate.setTextWrap(false);
     delegate.print("WUnderground");
     delegate.drawLine(79, 29, 82, 29, 1);
-    delegate.setTextColor(1);
+    delegate.setTextColor(TFT_GREEN);
     delegate.setTextSize(1);
-    delegate.setCursor(84, 23);
+    delegate.setCursor(84, height);
     delegate.setTextWrap(false);
     delegate.print(getWeatherExporterStatusName(context.exporters.getWeatherUndergroundExporterStatus()));
 
+	height += delegate.fontHeight(delegate.getFont());
+	Serial.printf("height = %d\n", height);
+	delegate.setCursor(7, height);
+
     delegate.drawBitmap(3, 37, image_list_element_tick, 3, 3, 1);
-    delegate.setTextColor(1);
+    delegate.setTextColor(TFT_GREEN);
     delegate.setTextSize(1);
-    delegate.setCursor(7, 33);
     delegate.setTextWrap(false);
     delegate.print("WindGuru");
+    
     delegate.drawLine(55, 39, 82, 39, 1);
-    delegate.setTextColor(1);
+    delegate.setTextColor(TFT_GREEN);
     delegate.setTextSize(1);
-    delegate.setCursor(84, 33);
+    delegate.setCursor(84, height);
     delegate.setTextWrap(false);
     delegate.print(getWeatherExporterStatusName(context.exporters.getWindGuruExporterStatus()));
 }

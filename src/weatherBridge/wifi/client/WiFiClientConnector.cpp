@@ -16,6 +16,7 @@ WiFiClientStatus WiFiClientConnector::loop() noexcept {
         case WL_SCAN_COMPLETED:
             if (millis() - lastConnectionRefresh > RECONNECT_INTERVAL_MILLIS) {
                 Log.noticeln("WiFi not connected, attempting reconnect");
+                Log.noticeln("WiFi SSID= %s rssi = %d", WiFi.SSID(), rssi);
                 WiFi.reconnect();
                 lastConnectionRefresh = millis();
             }

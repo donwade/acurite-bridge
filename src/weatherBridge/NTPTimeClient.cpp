@@ -26,6 +26,11 @@ void NTPTimeClient::begin(WeatherBridgeSettings &settings) {
         Log.traceln("NTPTimeClient: sync OK");
     });
     configTzTime(timezoneString, NTP_SERVER_1, NTP_SERVER_2, NTP_SERVER_3);
+
+    //setenv("TZ", "EST5EDT,M3.2.0,M11.1.0", 1);  // hardcode  
+    setenv("TZ", MY_TZ, 1);  // from my env. 
+	tzset();
+	
     Log.traceln("NTPTimeClient: sync interval set to %u", sntp_get_sync_interval());
 }
 

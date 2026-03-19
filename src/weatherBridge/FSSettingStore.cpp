@@ -21,6 +21,18 @@ static const String SELECTED_STATION_ID = FS_SETTING_STORE_KEY("selected_station
 FSSettingStore::FSSettingStore(FS &fs) noexcept: fs(fs) {}
 
 void FSSettingStore::begin() {
+
+	String wlanSSID = readFile(WLAN_SSID);
+
+	if (wlanSSID.equals("")) //POI comment this line out to force FILESYSTEM update
+	{
+		// POI add defaults 
+		Log.traceln("SETTING WLAN defaults");
+	    bool wlanSsidWriteRes = writeFile(WLAN_SSID, MY_SSID);
+	    bool wlanPasswordWriteRes = writeFile(WLAN_PASSWORD, MY_SSID_PASSWORD);
+	    bool wlanTZ = writeFile(POSIX_TZ_STRING, MY_TZ);
+	}
+
     settingsSnapshot = loadSettings();
 }
 
