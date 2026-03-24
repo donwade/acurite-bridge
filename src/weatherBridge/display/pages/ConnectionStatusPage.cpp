@@ -26,137 +26,81 @@ ConnectionStatusPage::ConnectionStatusPage(MY_GFX &display) : DisplayPage(displa
 
 void ConnectionStatusPage::paint(WeatherBridgeContext context) {
     // Wi-Fi details
-    uint32_t height = 0;
+	Home();
+
+	delegate.setTextColor(TFT_YELLOW);
+	delegate.setTextSize(1);
+	delegate.setTextWrap(false);
+	
     if (context.isConfigurationMode) {
-        delegate.drawBitmap(3, 7, image_menu_tools_bits, 15, 16, 1);
 
-		    height += delegate.fontHeight(delegate.getFont());
-		    Serial.printf("height = %d\n", height);
-		    delegate.setCursor(22, height);
-
-        delegate.setTextColor(TFT_YELLOW);
-        delegate.setTextSize(1);
-        delegate.setTextWrap(false);
         if (context.wifiApContext.isActive()) {
-            delegate.print("SSID: " + context.wifiApContext.getSsid());
+            lprintf( "SSID: %s", context.wifiApContext.getSsid());
         } else {
-            delegate.print("AP_INIT_ERROR");
+            lprintf( "AP_INIT_ERROR");
         }
 
-			height += delegate.fontHeight(delegate.getFont());
-			Serial.printf("height = %d\n", height);
-			delegate.setCursor(22, height);
-		
-        delegate.setTextColor(TFT_YELLOW);
-        delegate.setTextSize(1);
-        delegate.setTextWrap(false);
         if (context.wifiApContext.isActive()) {
             if (context.wifiApContext.getPassword().isEmpty()) {
-                delegate.print("(No password)");
+                lprintf("(No password)");
             } else {
-                delegate.print("PWD: " + context.wifiApContext.getPassword());
+                lprintf("PWD: %s", context.wifiApContext.getPassword());
             }
         }
 
-			height += delegate.fontHeight(delegate.getFont());
-			Serial.printf("height = %d\n", height);
-			delegate.setCursor(22, height);
-		
-        delegate.setTextColor(TFT_YELLOW);
-        delegate.setTextSize(1);
-        delegate.setCursor(22, 21);
-        delegate.setTextWrap(false);
         if (context.wifiApContext.isActive()) {
-            delegate.print(context.wifiApContext.getIp());
+            lprintf(context.wifiApContext.getIp());
         } else {
-            delegate.print("");
+            lprintf("AP idle");
         }
-    } else {
-        delegate.drawBitmap(1, 7, image_wifi_bits, 19, 16, 1);
-
-		height += delegate.fontHeight(delegate.getFont());
-		Serial.printf("height = %d\n", height);
-		delegate.setCursor(22, height);
-		
-        delegate.setTextColor(TFT_YELLOW);
-        delegate.setTextSize(1);
-        delegate.setTextWrap(false);
+    } 
+    else
+    {
         const String &settingsSsid = context.settings.getWlanSsid();
         const String &activeSsid = context.wifiConnectionStatus.getSsid();
         bool isConnected = context.wifiConnectionStatus.isConnected();
         int rssi = context.wifiConnectionStatus.getRSSI();
 
         if (!activeSsid.isEmpty()) {
-            delegate.print(activeSsid);
+            lprintf("WLAN = %s", activeSsid.c_str());
         } else if (!settingsSsid.isEmpty()) {
-            delegate.print(settingsSsid);
+            lprintf("SSID = %s", settingsSsid.c_str());
         } else {
-            delegate.print("Not Configured");
+            lprintf("Not Configured");
         }
 
-			height += delegate.fontHeight(delegate.getFont());
-			Serial.printf("height = %d\n", height);
-			delegate.setCursor(22, height);
-			
-        delegate.setTextColor(TFT_YELLOW);
-        delegate.setTextSize(1);
-        delegate.setTextWrap(false);
+		lprintf("SSID config %s", settingsSsid.isEmpty() ? "empty":"prgmd");
+		lprintf("WLAN %s", activeSsid.isEmpty() ? "noconnect":"connected");
+		
         if (isConnected) {
-            delegate.printf("RSSI: %d", rssi);
-        } else if (!activeSsid.isEmpty() || !settingsSsid.isEmpty()) {
-            delegate.print("Not connected");
+            lprintf("WLAN RSSI: %d", rssi);
         }
+        
+
     }
 
     // Station details
     const String &stationId = context.settings.getSelectedStationId();
     bool isStationSelected = !stationId.isEmpty();
     int isConnected = context.measurementsStore.getRssi().hasValue();
-    int rssi = isConnected ? context.measurementsStore.getRssi().getValue() : 0;
 
-    delegate.drawBitmap(2, 42, image_cloud_bits, 17, 16, 1);
+	int rssi = context.wifiConnectionStatus.getRSSI();
+    
+    //int rssi =   isConnected 
+    //		   ? context.measurementsStore.getRssi().getValue() 
+    //		   : 0;
 
-		height += delegate.fontHeight(delegate.getFont());
-		Serial.printf("height = %d\n", height);
-		delegate.setCursor(22, height);
-	
-    delegate.setTextColor(TFT_YELLOW);
-    delegate.setTextSize(1);
-    delegate.setTextWrap(false);
+    //lprintf("STN: Acurite 5n1 %s config", isStationSelected ? "":"NOT");
+  
     if (isStationSelected) {
-        delegate.print("Acurite 5n1");
-    } else {
-        delegate.print("Not Configured");
+        lprintf("ID: %s", stationId.c_str());
     }
 
-		height += delegate.fontHeight(delegate.getFont());
-		Serial.printf("height = %d\n", height);
-		delegate.setCursor(22, height);
-	
-    if (isStationSelected) {
-        delegate.setTextColor(TFT_YELLOW);
-        delegate.setTextSize(1);
-        delegate.setTextWrap(false);
-
-        delegate.printf("ID: %s", stationId.c_str());
-    }
-
-		height += delegate.fontHeight(delegate.getFont());
-		Serial.printf("height = %d\n", height);
-		delegate.setCursor(22, height);
-	
-    delegate.setTextColor(TFT_YELLOW);
-    delegate.setTextSize(1);
-    delegate.setTextWrap(false);
     if (isConnected) {
-        delegate.printf("RSSI: %d", rssi);
+        lprintf("WLAN RSSI: %d", rssi);
     } else if (isStationSelected) {
-        delegate.print("No connection");
+        lprintf("AP mode selected");
     }
 
-		height += delegate.fontHeight(delegate.getFont());
-		Serial.printf("height = %d\n", height);
-		delegate.setCursor(22, height);
-	
 }
 

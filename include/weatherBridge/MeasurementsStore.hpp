@@ -57,7 +57,7 @@ public:
 
     const TimedOptional<float> &getWindGustKmH() const;
 
-    const TimedOptional<float> &getWindDirectorDeg() const;
+    const TimedOptional<float> &getWindDirectionDeg() const;
 
     const TimedOptional<float> &getRainMmLastHour() const;
 

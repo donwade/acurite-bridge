@@ -64,9 +64,9 @@ void WeatherExporter::pwsWeatherExport(const WeatherBridgeContext &context) {
         request += "&windgustmph=";
         request += kmPerHourToMilesPerHour(measurements.getWindGustKmH().getValue());
     }
-    if (measurements.getWindDirectorDeg().hasValue()) {
+    if (measurements.getWindDirectionDeg().hasValue()) {
         request += "&winddir=";
-        request += measurements.getWindDirectorDeg().getValue();
+        request += measurements.getWindDirectionDeg().getValue();
     }
     if (measurements.getHumidity().hasValue()) {
         request += "&humidity=";
@@ -146,9 +146,9 @@ void WeatherExporter::weatherUndergroundExport(const WeatherBridgeContext &conte
         request += "&windgustmph=";
         request += kmPerHourToMilesPerHour(measurements.getWindGustKmH().getValue());
     }
-    if (measurements.getWindDirectorDeg().hasValue()) {
+    if (measurements.getWindDirectionDeg().hasValue()) {
         request += "&winddir=";
-        request += measurements.getWindDirectorDeg().getValue();
+        request += measurements.getWindDirectionDeg().getValue();
     }
     if (measurements.getHumidity().hasValue()) {
         request += "&humidity=";
@@ -245,9 +245,9 @@ void WeatherExporter::windyGuruExport(const WeatherBridgeContext &context) {
         request += "&wind_max=";
         request += kmPerHourToKnots(measurements.getWindGustKmH().getValue());
     }
-    if (measurements.getWindDirectorDeg().hasValue()) {
+    if (measurements.getWindDirectionDeg().hasValue()) {
         request += "&wind_direction=";
-        request += measurements.getWindDirectorDeg().getValue();
+        request += measurements.getWindDirectionDeg().getValue();
     }
     if (measurements.getHumidity().hasValue()) {
         request += "&rh=";
@@ -335,9 +335,9 @@ void WeatherExporter::windyExport(const WeatherBridgeContext &context) {
         request += "&windgustmph=";
         request += kmPerHourToMilesPerHour(measurements.getWindGustKmH().getValue());
     }
-    if (measurements.getWindDirectorDeg().hasValue()) {
+    if (measurements.getWindDirectionDeg().hasValue()) {
         request += "&winddir=";
-        request += measurements.getWindDirectorDeg().getValue();
+        request += measurements.getWindDirectionDeg().getValue();
     }
     if (measurements.getHumidity().hasValue()) {
         request += "&humidity=";

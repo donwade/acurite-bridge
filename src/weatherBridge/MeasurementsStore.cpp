@@ -121,7 +121,7 @@ const TimedOptional<float> &MeasurementsStore::getWindGustKmH() const {
     return windGustKmH;
 }
 
-const TimedOptional<float> &MeasurementsStore::getWindDirectorDeg() const {
+const TimedOptional<float> &MeasurementsStore::getWindDirectionDeg() const {
     return windDirectorDeg;
 }
 

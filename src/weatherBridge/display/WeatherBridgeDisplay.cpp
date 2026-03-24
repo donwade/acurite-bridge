@@ -71,10 +71,15 @@ void WeatherBridgeDisplay::refresh(WeatherBridgeContext context) {
 
 void WeatherBridgeDisplay::nextPage(WeatherBridgeContext context) {
     size_t totalPages = ArraySize(pages);
+
+    nextPageIndex = 0; //// dwade
+    
     Log.traceln(F("WeatherBridgeDisplay: Painting page %d of %d"), nextPageIndex + 1, totalPages);
     delegate.clearDisplay();
+    
     pages[nextPageIndex]->paint(context);
     delegate.display();
+
     nextPageIndex = (nextPageIndex + 1) % totalPages;
     Log.traceln(F("WeatherBridgeDisplay: Painting complete"));
 }
