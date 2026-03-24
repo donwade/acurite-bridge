@@ -22,6 +22,7 @@ void MeasurementsStore::loop() {
 
 void MeasurementsStore::updateMeasurements(const StationMeasurements &measurements) {
     if (measurements.stationModel != stationModel || measurements.stationId != stationId) {
+    	Serial.printf("sssssssssssss no match\n");
         return;
     }
 

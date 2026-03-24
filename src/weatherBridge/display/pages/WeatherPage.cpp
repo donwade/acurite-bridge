@@ -16,13 +16,17 @@ WeatherPage::WeatherPage(MY_GFX &display) : DisplayPage(display) {}
 
 void WeatherPage::paint(WeatherBridgeContext context) {
     char buf[10];
-    
-    delegate.drawBitmap(9, 5, image_weather_temperature_bits, 16, 16, 1);
+
+    delegate.setFont(&fonts::FreeSansBold18pt7b);
+	Home();
+	
     delegate.setTextColor(TFT_YELLOW);
-    delegate.setTextSize(2);
+    delegate.setTextSize(3);
+    delegate.setTextWrap(false); 
     
-    delegate.setTextWrap(false);
-    if (context.measurementsStore.getWindSpeedKmH().hasValue()) {
+    //delegate.drawBitmap(9, 5, image_weather_temperature_bits, 16, 16, 1);
+     
+     if (context.measurementsStore.getWindSpeedKmH().hasValue()) {
         //float knots = kmPerHourToKnots(context.measurementsStore.getWindSpeedKmH().getValue());
         //sprintf(buf, "%.1fkts", knots);
         float kph = context.measurementsStore.getWindSpeedKmH().getValue();
@@ -33,8 +37,8 @@ void WeatherPage::paint(WeatherBridgeContext context) {
     }
     
     delegate.setTextColor(TFT_GREEN);
-    delegate.setTextSize(2);
-    delegate.setTextWrap(false);
+    delegate.setTextSize(3);
+    
     if (context.measurementsStore.getTemperatureC().hasValue()) {
         float tempC = context.measurementsStore.getTemperatureC().getValue();
         if (tempC > 0.0) {
@@ -47,10 +51,8 @@ void WeatherPage::paint(WeatherBridgeContext context) {
         lprintf("--- C");
     }
 
-    delegate.drawBitmap(8, 24, image_weather_wind_bits, 15, 16, 1);
+    //delegate.drawBitmap(8, 24, image_weather_wind_bits, 15, 16, 1);
     delegate.setTextColor(TFT_BLUE);
-    delegate.setTextSize(1);
-    delegate.setTextWrap(false);
 
 	float directionDegrees = 0.;
 	float kph = 0.0;
