@@ -22,10 +22,17 @@ void MeasurementsStore::loop() {
 
 void MeasurementsStore::updateMeasurements(const StationMeasurements &measurements) {
     if (measurements.stationModel != stationModel || measurements.stationId != stationId) {
-    	Serial.printf("sssssssssssss no match\n");
+    	Serial.printf("%s no match\n", __FUNCTION__);
+    	Serial.printf("model %d vs %d\n", measurements.stationModel, stationModel);
+    	Serial.printf("ID %d vs %d\n", measurements.stationId, stationId);
+    	
         return;
     }
-
+    
+	Serial.printf("%s CAPTURE !!!\n", __FUNCTION__);
+	Serial.printf("model %d vs %d\n", measurements.stationModel, stationModel);
+	Serial.printf("ID %d vs %d\n", measurements.stationId, stationId);
+	
     rssi.set(measurements.rssi);
     if (measurements.temperatureC.hasValue()) {
         temperatureC.set(measurements.temperatureC.getValue());

@@ -82,3 +82,12 @@ to [Loki](https://grafana.com/oss/loki/). To enable Loki logging,
 copy [config/secrets.ini.dist](config/secrets.ini.dist) into `config/secrets.ini` and configure Loki exporter there. Then you'll be able to read station logs remotely in Loki, without connecting ESP to PC.
 
 Check internals at [LokiLogger](include/weatherBridge/LokiLogger.hpp).
+
+## Notes
+Fridge 515 temp monitor
+T: Received message: {"model":"Acurite-515", "id":12,"channel":"AF","battery_ok":7,"temperature_C":-19.1111,"mic":"CHECKSUM","protocol":"Acurite 592TXR Temp/Humidity, 592TX Temp, 5n1 Weather Station, 6045 Lightning, 899 Rain, 3N1, Atlas","rssi":-84,"duration":104007}
+T: Received message: {"model":"Acurite-515","id":169,"channel":"AR","battery_ok":1,"temperature_C":4.77778,"mic":"CHECKSUM","protocol":"Acurite 592TXR Temp/Humidity, 592TX Temp, 5n1 Weather Station, 6045 Lightning, 899 Rain, 3N1, Atlas","rssi":-91,"duration":103001}
+
+Unknown
+Received message: {"model":"Acurite-986","id":29186,"channel":"1R","battery_ok":1,"temperature_C":-44.4444,"status":32,"mic":"CRC","protocol":"Acurite 986 Refrigerator / Freezer Thermometer","rssi":-96,"duration":476000}
+Received message: {"model":"Acurite-00276rm","subtype":0,"id":13115618,"battery_ok":1,"temperature_C":105.4,"humidity":0,"mic":"CRC","protocol":"Acurite 00277rm,00276rm Temp/Humidity with optional probe","rssi":-95,"duration":170011}

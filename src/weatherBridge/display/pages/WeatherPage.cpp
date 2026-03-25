@@ -21,7 +21,7 @@ void WeatherPage::paint(WeatherBridgeContext context) {
 	Home();
 	
     delegate.setTextColor(TFT_YELLOW);
-    delegate.setTextSize(3);
+    delegate.setTextSize(2);
     delegate.setTextWrap(false); 
     
     //delegate.drawBitmap(9, 5, image_weather_temperature_bits, 16, 16, 1);
@@ -37,7 +37,6 @@ void WeatherPage::paint(WeatherBridgeContext context) {
     }
     
     delegate.setTextColor(TFT_GREEN);
-    delegate.setTextSize(3);
     
     if (context.measurementsStore.getTemperatureC().hasValue()) {
         float tempC = context.measurementsStore.getTemperatureC().getValue();
@@ -75,9 +74,22 @@ void WeatherPage::paint(WeatherBridgeContext context) {
 		{
 			lprintf("Steady .1f %s %.1f", 
 				directionDegrees, 
-				convertDegreesToWindDirection(directionDegrees), 
+				convertDegreesToWindDirection(directionDegrees).c_str(), 
 				context.measurementsStore.getWindSpeedKmH());
 		}
 	}
+	else
+	{
+		if (context.measurementsStore.getWindSpeedKmH().hasValue())
+		{
+			kph = context.measurementsStore.getWindSpeedKmH().getValue();
+			lprintf("%3s %.1f Dir", 
+				convertDegreesToWindDirection(directionDegrees).c_str(),
+				directionDegrees);
+		}
+		else
+			lprintf("--- Dir"); 
+		
+ 	}
  }
 

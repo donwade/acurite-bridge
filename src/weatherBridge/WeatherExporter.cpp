@@ -7,6 +7,14 @@
 #include "weatherBridge/LokiLogger.hpp"
 
 void WeatherExporter::loop(const WeatherBridgeContext &context) {
+
+#if 1
+	static bool bWarning = true;
+	if (bWarning) Serial.printf("%s: ************** reporting weather disabled TBD\n", __PRETTY_FUNCTION__);
+	bWarning = false;
+	return;
+#else	
+	// dwade disable reporting until other things work.
     if (context.ntpTimeSyncOk) {
         pwsWeatherExport(context);
         weatherUndergroundExport(context);
@@ -18,6 +26,7 @@ void WeatherExporter::loop(const WeatherBridgeContext &context) {
         windGuruExporterStatus = WeatherExporterStatus::NTP_ERR;
         windyExporterStatus = WeatherExporterStatus::NTP_ERR;
     }
+#endif
 }
 
 void WeatherExporter::pwsWeatherExport(const WeatherBridgeContext &context) {

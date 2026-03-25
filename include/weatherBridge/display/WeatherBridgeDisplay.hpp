@@ -36,7 +36,7 @@ public:
 
     void begin();
 
-    void refresh(WeatherBridgeContext context);
+    void displayTimer(WeatherBridgeContext context);
 
 private:
     void nextPage(WeatherBridgeContext context);

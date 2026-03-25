@@ -16,9 +16,10 @@ private:
     static constexpr unsigned int WIND_MEASUREMENTS_EXPIRE_TIMEOUT = 2 * 60 * 1000;
 
     // keep
-    int stationId = -1;
+    int stationId = 3870; // dwade (was 0)
 
-    StationModel stationModel = StationModel::NOT_SELECTED;
+    StationModel stationModel = StationModel::ACURITE_5N1; //dwade was 'NOT_SELECTED'
+    
     TimedOptional<int> rssi = TimedOptional<int>::empty(NOT_WIND_MEASUREMENTS_EXPIRE_TIMEOUT);
 
     TimedOptional<int> humidity = TimedOptional<int>::empty(NOT_WIND_MEASUREMENTS_EXPIRE_TIMEOUT);

@@ -15,7 +15,7 @@ void DisplayPage::Home(int16_t marginLeft)
 	// first time using a page, you forgot to set left margin
 	assert(vertPixel < 500);
 	
-	Serial.printf("Home vertPixel = %d\n", vertPixel);
+	//Serial.printf("Home vertPixel = %d\n", vertPixel);
 	
 	delegate.setCursor(lastMargin, vertPixel);
 }
@@ -26,7 +26,7 @@ uint16_t DisplayPage::LineAdvance(void)
 	assert(vertPixel < 500); 
 	
 	vertPixel += delegate.fontHeight(delegate.getFont());
-	Serial.printf("vertPixel = %d\n", vertPixel);
+	//Serial.printf("vertPixel = %d\n", vertPixel);
 	delegate.setCursor(lastMargin, vertPixel);
 	return vertPixel;
 }

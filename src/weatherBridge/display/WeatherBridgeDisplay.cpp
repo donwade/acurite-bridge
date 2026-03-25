@@ -61,9 +61,9 @@ void WeatherBridgeDisplay::begin() {
     }
 }
 
-void WeatherBridgeDisplay::refresh(WeatherBridgeContext context) {
+void WeatherBridgeDisplay::displayTimer(WeatherBridgeContext context) {
     if (millis() - lastPageSwitchMillis >= WEATHER_EXPORTER_DISPLAY_PAGE_UPDATE_INTERVAL_MILLIS) {
-        Log.traceln(F("WeatherBridgeDisplay: Performing checkStatus"));
+        //Log.traceln(F("WeatherBridgeDisplay: Performing checkStatus"));
         nextPage(context);
         lastPageSwitchMillis = millis();
     }
@@ -81,8 +81,7 @@ void WeatherBridgeDisplay::nextPage(WeatherBridgeContext context) {
     delegate.display();
 
     nextPageIndex = (nextPageIndex + 1) % totalPages;
-    Log.traceln(F("WeatherBridgeDisplay: Painting complete"));
-}
+ }
 
 void WeatherBridgeDisplay::paintSplash() {
 	int32_t height = 0;

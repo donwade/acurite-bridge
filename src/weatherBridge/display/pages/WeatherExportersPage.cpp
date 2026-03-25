@@ -3,7 +3,6 @@
 
 static const unsigned char PROGMEM image_list_element_tick[] = {0x80, 0xc0, 0xe0};
 
-
 WeatherExportersPage::WeatherExportersPage(MY_GFX &display) : DisplayPage(display) {}
 
 void WeatherExportersPage::paint(WeatherBridgeContext context) {
@@ -11,19 +10,14 @@ void WeatherExportersPage::paint(WeatherBridgeContext context) {
 	Home();
     delegate.setTextColor(TFT_GREEN);
     delegate.setTextWrap(false);
-    delegate.print("PWS Weather");
 
-    lprintf(getWeatherExporterStatusName(context.exporters.getPwsWeatherExporterStatus()));
+    lprintf("PWS Weather : %s", getWeatherExporterStatusName(context.exporters.getPwsWeatherExporterStatus()).c_str());
 
-    lprintf("Windy");
-    lprintf(getWeatherExporterStatusName(context.exporters.getWindyExporterStatus()));
+    lprintf("Windy : %s",getWeatherExporterStatusName(context.exporters.getWindyExporterStatus()).c_str());
 
-    lprintf("WUnderground");
-    lprintf(getWeatherExporterStatusName(context.exporters.getWeatherUndergroundExporterStatus()));
+    lprintf("WUnderground : %s", getWeatherExporterStatusName(context.exporters.getWeatherUndergroundExporterStatus()).c_str());
 
-    lprintf("WindGuru");
-    
-    lprintf(getWeatherExporterStatusName(context.exporters.getWindGuruExporterStatus()));
+    lprintf("WindGuru : %s", getWeatherExporterStatusName(context.exporters.getWindGuruExporterStatus()).c_str());
 }
 
 String WeatherExportersPage::getWeatherExporterStatusName(WeatherExporterStatus status) {

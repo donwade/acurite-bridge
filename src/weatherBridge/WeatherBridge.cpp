@@ -52,5 +52,5 @@ void WeatherBridge::loop() {
     if (!isConfigurationMode) {
         exportersContainer.loop(context);
     }
-    display.refresh(context);
+    display.displayTimer(context);
 }
