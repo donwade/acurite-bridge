@@ -102,7 +102,8 @@
 #endif
 
 #ifndef SX127X_RXBANDWIDTH
-#  define SX127X_RXBANDWIDTH 250
+#  define SX127X_RXBANDWIDTH 8    // only see my device
+//#  define SX127X_RXBANDWIDTH 250
 #endif
 
 /*----------------------------- Predefined board wiring -----------------------------*/
@@ -467,8 +468,6 @@ private:
    * reset "promotes" the current edge as being the first edge of a new
    * sequence.
    */
-  static void resetReceiver();
-
   static int _getRSSI();
 
   /**

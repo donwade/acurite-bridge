@@ -180,7 +180,7 @@ void rtl_433_ESP::initReceiver(byte irqInputPin, float receiveFrequency) {
   RADIOLIB_STATE(state, "radio.begin()");
 
   radio.setFrequency(receiveFrequency);
-  resetReceiver();
+//  resetReceiver();
 #ifdef ONBOARD_LED
   pinMode(ONBOARD_LED, OUTPUT);
   digitalWrite(ONBOARD_LED, LOW);
@@ -406,22 +406,6 @@ void ICACHE_RAM_ATTR rtl_433_ESP::interruptHandler() {
     }
     _lastChange = now;
   }
-}
-
-/**
- * @brief Reset received signal storage
- * 
- */
-void rtl_433_ESP::resetReceiver() {
-  for (unsigned int i = 0; i < RECEIVER_BUFFER_SIZE; i++) {
-    _pulseTrains[i].num_pulses = 0;
-  }
-  _avaiablePulseTrain = 0;
-  _actualPulseTrain = 0;
-  _nrpulses = 0;
-
-  receiveMode = false;
-  signalStart = micros();
 }
 
 /**

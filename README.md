@@ -1,5 +1,9 @@
 # Acurite 5n1 -> Weather Services Forwarder
 
+this project is abandoned. It works on a m5 with DIO2=PIN25 (disable IRQ, RST)
+very nice usage of C++ constructs (i've never seen this on github for esp projects)
+too much stuff for what I need, i could do forwarding but no interested.
+
 Receives AcuRite 5n1 Weather Station measurements and uploads them to multiple weather services.
 Try [Marine Screen](https://github.com/shchuko/marine-screen) to display your station measurements on TV
 
