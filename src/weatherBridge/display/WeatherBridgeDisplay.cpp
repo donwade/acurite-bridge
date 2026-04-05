@@ -74,7 +74,7 @@ void WeatherBridgeDisplay::nextPage(WeatherBridgeContext context) {
 
     nextPageIndex = 2; //// dwade
     
-    Log.traceln(F("WeatherBridgeDisplay: Painting page %d of %d"), nextPageIndex + 1, totalPages);
+    // POI Log.traceln(F("WeatherBridgeDisplay: Painting page %d of %d"), nextPageIndex + 1, totalPages);
     delegate.clearDisplay();
     
     pages[nextPageIndex]->paint(context);

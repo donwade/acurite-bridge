@@ -47,7 +47,7 @@ int DisplayPage::lprintf(const char* format, ... )
 	
 	LineAdvance();
 	
-	Serial.printf("--->  %s\n", lclBuf);
+	// POI Serial.printf("--->  %s\n", lclBuf); // print lcd prints to serial
     va_end(args); 
     return ret;
 }

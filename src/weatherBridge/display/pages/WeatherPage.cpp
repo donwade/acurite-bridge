@@ -57,6 +57,8 @@ void WeatherPage::paint(WeatherBridgeContext context) {
 	float kph = 0.0;
 	if (context.measurementsStore.getWindDirectionDeg().hasValue())
 	{
+#if 0
+		// dwade doesnt work
 		if (context.measurementsStore.getWindGustKmH().hasValue()) 
 		{
 			kph = context.measurementsStore.getWindGustKmH().getValue();
@@ -69,13 +71,16 @@ void WeatherPage::paint(WeatherBridgeContext context) {
 		{
 			lprintf("Gust ---");
 		}
-
+#endif
 		if (context.measurementsStore.getWindSpeedKmH().hasValue())
 		{
-			lprintf("Steady .1f %s %.1f", 
-				directionDegrees, 
-				convertDegreesToWindDirection(directionDegrees).c_str(), 
-				context.measurementsStore.getWindSpeedKmH());
+//			lprintf("Steady .1f %s %.1f", 
+//				directionDegrees, 
+//				convertDegreesToWindDirection(directionDegrees).c_str(), 
+//				context.measurementsStore.getWindSpeedKmH());
+			lprintf("%4s %.1f", 
+				convertDegreesToWindDirection(directionDegrees).c_str(),
+				directionDegrees);
 		}
 	}
 	else
