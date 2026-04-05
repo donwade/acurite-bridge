@@ -4,7 +4,7 @@
 #include "weatherBridge/RingBuffer.hpp"
 #include "weatherBridge/arrayExtensions.hpp"
 
-static constexpr float RF_MODULE_FREQUENCY = 433.92;
+static constexpr float RF_MODULE_FREQUENCY = (float)(433948200 - 2100)/1000000.;  // dwade was 433.92;
 static constexpr size_t MESSAGE_QUEUE_SIZE = 30;
 static char receiveBuffer[512];
 static RingBuffer<String> messageQueue(MESSAGE_QUEUE_SIZE);
