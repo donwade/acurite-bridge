@@ -969,7 +969,25 @@ void rtl_433_ESP::getModuleStatus() {
   alogprintfLn(LOG_INFO, "FDEV_LSB: 0x%.2x",
                _mod->SPIreadRegister(RADIOLIB_SX127X_REG_FDEV_LSB));
  }
-  alogprintfLn(LOG_INFO, "----- SX127x Status -----");
+ 
+  alogprintfLn(LOG_INFO, "\n");
+ 
+  for(int i = 0; i < 0x4E; i++)
+  {
+	 alogprintfLn(LOG_INFO, "SX127x[0x%.2x] 0x%.2x", i, _mod->SPIreadRegister(i));
+  }
+ 
+#define DUMPER(z) alogprintfLn(LOG_INFO, "SX127x[0x%.2x] 0x%.2x", z, _mod->SPIreadRegister(z))
+  DUMPER(0x4B);
+  DUMPER(0x4D);
+  DUMPER(0x5B);
+  DUMPER(0x5D);
+ 
+  for(int i = 0x61; i < 0x65; i++)
+  {
+	 alogprintfLn(LOG_INFO, "SX127x[0x%.2x] 0x%.2x", i, _mod->SPIreadRegister(i));
+  }
+  alogprintfLn(LOG_INFO, "----- acurite-bridge SX127x Status -----");
 
 #endif
 }
