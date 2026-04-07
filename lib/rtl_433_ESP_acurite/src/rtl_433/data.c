@@ -262,6 +262,7 @@ static data_t *vdata_make(data_t *first, const char *key, const char *pretty_key
             type = va_arg(ap, data_type_t);
         }
     } while (key);
+    va_end(ap);
     if (format) {
         fprintf(stderr, "vdata_make() format type without data\n");
         goto alloc_error;
